@@ -9,8 +9,8 @@ class MainPage(object):
     driver = ''
     def __init__(self):
         print("这个执行吗")
-        andriodClient = AndroidClient()
-        self.driver = andriodClient.restart_app()
+        # andriodClient = AndroidClient()
+        self.driver = AndroidClient.restart_app()
 
     def gotoCategoryOfSelected(self, category='移动端测试'):
         if category == '移动端测试':
