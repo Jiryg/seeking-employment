@@ -24,12 +24,14 @@ class Test_findJob(object):
     def test_Contact_MoblieTest(self):
         detailpage = DetailsPageOfJob()
         mainpage = MainPage()
-
+        uti = Utils()
         mainpage.gotoCategoryOfSelected()
         logging.debug("***********************跟第 %s 个打招呼***********************")
         mainpage.gotoDetailsPageOfjob()
         if detailpage.ifChatRightly():
             detailpage.contactRightly()
+        else:
+            uti.swipeUpOneCard()
         logging.debug("执行完毕")
 
 
