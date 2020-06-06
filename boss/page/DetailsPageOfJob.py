@@ -16,7 +16,7 @@ class DetailsPageOfJob(BasePage):
     _btn_continue_chat = (By.ID, "btn_continue_chat")
     _tv_description = (By.ID, "tv_description")
     stateOfsendCV = "ll_exchange_resume"
-    _black_list_path = "D:\\PycharmProjects\\firstDemo\\gongzuo\\data\\black_list_of_jobs"
+    _black_list_path = "D:\\PycharmProjects\\firstDemo\\gongzuo\\boss\\data\\black_list_of_jobs"
     _black_list = ''
 
     # def setup_method(self):

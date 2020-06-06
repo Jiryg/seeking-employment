@@ -90,5 +90,5 @@ if __name__ == '__main__':
     print(size)
 
 if __name__ == '__main__':
-    black_list_path = "gongzuo\\data\\black_list_of_jobs"
+    black_list_path = "gongzuo\\boss\\data\\black_list_of_jobs"
     getContentFromYamlFile(black_list_path)
