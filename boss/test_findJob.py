@@ -19,25 +19,19 @@ class Test_findJob(object):
     def teardown_class(self):
         logging.debug("**************类执行结束***************")
 
-    @pytest.mark.parametrize("nums", [50])
-    def test_Contact_MoblieTest(self, nums):
+    # @pytest.mark.parametrize("nums", [50])
+    @pytest.mark.repeat(50)
+    def test_Contact_MoblieTest(self):
         detailpage = DetailsPageOfJob()
         mainpage = MainPage()
-        chatpage = ChatPage()
 
-        # uti = Utils()
         mainpage.gotoCategoryOfSelected()
-        for x in range(nums):
-            logging.debug("***********************跟第 %s 个打招呼***********************", x)
-            mainpage.gotoDetailsPageOfjob()
-            sleep(1)
-            if detailpage.ifChatRightly():
-                detailpage.contactRightly()
-            # uti.swipeUpOneCard()
-        # detailpage = DetailsPageOfJob()
-        # detailpage.contactRightly()
+        logging.debug("***********************跟第 %s 个打招呼***********************")
+        mainpage.gotoDetailsPageOfjob()
+        if detailpage.ifChatRightly():
+            detailpage.contactRightly()
         logging.debug("执行完毕")
-        # ContactRightly()
+
 
     @pytest.mark.parametrize("nums", [3])
     def test_chat_and_send_cv(self, nums):
