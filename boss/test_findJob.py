@@ -13,13 +13,18 @@ from gongzuo.boss.utils.utils import Utils
 
 class Test_findJob(object):
     driver=WebDriver
+    def setup_class(self):
+        App.main()
+
+    def teardown_class(self):
+        logging.debug("**************类执行结束***************")
 
     @pytest.mark.parametrize("nums", [50])
     def test_Contact_MoblieTest(self, nums):
         detailpage = DetailsPageOfJob()
         mainpage = MainPage()
         chatpage = ChatPage()
-        App.main()
+
         # uti = Utils()
         mainpage.gotoCategoryOfSelected()
         for x in range(nums):
