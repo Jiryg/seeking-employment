@@ -5,14 +5,16 @@ from appium.webdriver.webdriver import WebDriver
 from gongzuo.boss.driver.AndroidClient import AndroidClient
 import logging
 
+from gongzuo.boss.page.BasePage import BasePage
 
-class Utils(object):
-    driver: WebDriver
+
+class Utils(BasePage):
+    # driver: WebDriver
     logging.basicConfig(level=logging.DEBUG,
                         format="%(asctime)s %(name)s %(levelname)s %(message)s",
                         datefmt='%Y-%m-%d  %H:%M:%S %a'
                         )
-    driver = AndroidClient.driver
+    # driver = AndroidClient.driver
     # def __init__(self):
     #     self.driver = AndroidClient.restart_app()
 
@@ -29,6 +31,7 @@ class Utils(object):
         logging.debug("上滑操作执行完毕")
 
     def swipeUpOneCard(self):
+        self.driver = AndroidClient.driver
         self.size = self.driver.get_window_size()
         print(self.size)
         self.x_start = self.size["width"] // 2
@@ -69,6 +72,12 @@ class Utils(object):
             return False
 
 if __name__ == '__main__':
+    from gongzuo.boss.page.App import App
     utils = Utils()
     # utils.swipe_downToUp()
-    utils.swipeUpOneCard()
+    # utils.swipeUpOneCard()
+    driver = AndroidClient.driver
+    App.main()
+    # driver.get_window_size()
+    size = driver.get_window_rect()
+    print(size)

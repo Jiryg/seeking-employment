@@ -1,8 +1,9 @@
+from gongzuo.boss.page.BasePage import BasePage
 from gongzuo.boss.utils.utils import logging
 from gongzuo.boss.driver.AndroidClient import AndroidClient
 
 
-class MessagePage(object):
+class MessagePage(BasePage):
     # 极速处理 + 消息数
     mContent = 'mContent'
 

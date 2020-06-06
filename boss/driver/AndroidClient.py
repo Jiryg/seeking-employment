@@ -3,7 +3,8 @@ from appium.webdriver.webdriver import WebDriver
 
 
 class AndroidClient(object):
-    driver = WebDriver
+    driver= WebDriver
+
     @classmethod
     def install_app(cls) -> WebDriver:
         caps = {}

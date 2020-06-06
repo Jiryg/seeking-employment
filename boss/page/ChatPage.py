@@ -1,16 +1,20 @@
+from time import sleep
+
 from gongzuo.boss.driver.AndroidClient import AndroidClient
+from gongzuo.boss.page.BasePage import BasePage
 from gongzuo.boss.utils.utils import logging
 
 
-class ChatPage(object):
+class ChatPage(BasePage):
     have_sent = "// *[contains( @ text, '已发送给')]"
     DE = "//*[@resource-id='com.hpbr.bosszhipin:id/tv_name' and @instance='2']"
     AutoTester = "//*[@resource-id='com.hpbr.bosszhipin:id/tv_name' and @instance='6']"
     TE = "//*[@resource-id='com.hpbr.bosszhipin:id/tv_name' and @instance='4']"
+    page_source = ''
 
 
     def send_cv(self):
-        self.driver = AndroidClient.driver
+        # self.driver = AndroidClient.driver
         job_name = ''
         try:
             job_name = self.driver.find_element_by_id("tv_position_name").text
@@ -49,7 +53,7 @@ class ChatPage(object):
         if self.have_sent in page_source:
             return False
         else:
-            black_list = ["外派", "驻场", "渗透", "专家", "电源", "赴", "测试主管"]
+            black_list = ["驻场", "微创软件", "渗透", "专家", "神州数码", "软通动力", "法本", "电源", "赴", "外派", "测试主管"]
             for black in black_list:
                 if black in page_source:
                     logging.debug("命中黑名单，不能投递简历")
@@ -63,3 +67,21 @@ class ChatPage(object):
             return False
         else:
             return True
+
+    def autoSendCV(self):
+        self.driver = AndroidClient.driver
+        self.driver.find_element_by_id("tv_exchange_resume").click()
+        self.driver.tap([(312,1500)], 100)
+        self.driver.find_element_by_id("mSure").click()
+
+
+if __name__ == '__main__':
+    from gongzuo.boss.page.MessagePage import MessagePage
+    from gongzuo.boss.page.MainPage import MainPage
+    mainPage = MainPage()
+    messPage = MessagePage()
+    mainPage.gotoMessagePage()
+    messPage.toChatPage()
+    chatpage = ChatPage()
+    chatpage.page_source = ["外派", "驻场", "渗透", "专家", "电源", "赴", "测试主管"]
+    print(chatpage.ifSend_cv())

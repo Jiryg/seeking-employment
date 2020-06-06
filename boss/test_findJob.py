@@ -1,7 +1,6 @@
 from time import sleep
-
 import pytest
-
+from gongzuo.boss.page.App import App
 from gongzuo.boss.page.ChatPage import ChatPage
 from gongzuo.boss.page.MainPage import logging
 from appium.webdriver.webdriver import WebDriver
@@ -17,16 +16,18 @@ class Test_findJob(object):
 
     @pytest.mark.parametrize("nums", [50])
     def test_Contact_MoblieTest(self, nums):
-        # self.driver = AndroidClient.restart_app()
-        mainpage = MainPage()
         detailpage = DetailsPageOfJob()
+        mainpage = MainPage()
+        chatpage = ChatPage()
+        App.main()
         # uti = Utils()
         mainpage.gotoCategoryOfSelected()
         for x in range(nums):
             logging.debug("***********************跟第 %s 个打招呼***********************", x)
             mainpage.gotoDetailsPageOfjob()
             sleep(1)
-            detailpage.contactRightly()
+            if detailpage.ifChatRightly():
+                detailpage.contactRightly()
             # uti.swipeUpOneCard()
         # detailpage = DetailsPageOfJob()
         # detailpage.contactRightly()

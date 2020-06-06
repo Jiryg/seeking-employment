@@ -2,17 +2,22 @@ from time import sleep
 from appium.webdriver.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from gongzuo.boss.driver.AndroidClient import AndroidClient
+from gongzuo.boss.page.BasePage import BasePage
 from gongzuo.boss.page.DetailsPageOfJob import DetailsPageOfJob
+from gongzuo.boss.page.MessagePage import MessagePage
 from gongzuo.boss.utils.utils import logging
+from gongzuo.boss.page import App
 
-class MainPage(object):
-    driver = ''
-    def __init__(self):
-        print("这个执行吗")
-        # andriodClient = AndroidClient()
-        self.driver = AndroidClient.restart_app()
+
+class MainPage(BasePage):
+
+    # def __init__(self):
+    #     print("这个执行吗")
+    #     # andriodClient = AndroidClient()
+    #     self.driver = AndroidClient.restart_app()
 
     def gotoCategoryOfSelected(self, category='移动端测试'):
+        self.driver = AndroidClient.driver
         if category == '移动端测试':
             # self.driver.find_element(self, by=By.XPATH, value="//*[@resource-id='com.hpbr.bosszhipin:id/title_container'] //*[@text='移动端测试']").click()
             self.driver.find_element_by_xpath("//*[@resource-id='com.hpbr.bosszhipin:id/title_container'] //*[@text='移动端测试']").click()
@@ -26,15 +31,17 @@ class MainPage(object):
         # return ProfilePage()
 
     def gotoDetailsPageOfjob(self):
-        # todo
         sleep(5)
-        self.driver.tap([(300, 500)], 500)
+        self.driver.tap([(300, 500)], 100)
         # return DetailsPageOfJob()
 
     def gotoMessagePage(self):
         self.driver.find_element_by_id("com.hpbr.bosszhipin:id/iv_tab_3").click()
+        # return MessagePage()
 
 if __name__ == '__main__':
-    mainpage = MainPage()
-    mainpage.gotoCategoryOfSelected()
-    mainpage.gotoDetailsPageOfjob()
+    App.App.main()
+    main = MainPage()
+    main.gotoCategoryOfSelected()
+    # main.gotoMessagePage()
+    main.gotoDetailsPageOfjob()
