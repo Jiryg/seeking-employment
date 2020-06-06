@@ -2,7 +2,7 @@ from time import sleep
 
 from gongzuo.boss.driver.AndroidClient import AndroidClient
 from gongzuo.boss.page.BasePage import BasePage
-from gongzuo.boss.utils.utils import logging
+from gongzuo.boss.utils.utils import logging, getContentFromYamlFile
 
 
 class ChatPage(BasePage):
@@ -53,7 +53,7 @@ class ChatPage(BasePage):
         if self.have_sent in page_source:
             return False
         else:
-            black_list = ["驻场", "微创软件", "渗透", "专家", "神州数码", "软通动力", "法本", "电源", "赴", "外派", "测试主管"]
+            black_list = getContentFromYamlFile(self.black_list_path)
             for black in black_list:
                 if black in page_source:
                     logging.debug("命中黑名单，不能投递简历")

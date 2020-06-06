@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from gongzuo.boss.driver.AndroidClient import AndroidClient
 from gongzuo.boss.page.BasePage import BasePage
 from gongzuo.boss.page.ChatPage import ChatPage
-from gongzuo.boss.utils.utils import Utils
+from gongzuo.boss.utils.utils import Utils, getContentFromYamlFile
 from gongzuo.boss.utils.utils import logging
 
 
@@ -16,6 +16,8 @@ class DetailsPageOfJob(BasePage):
     _btn_continue_chat = (By.ID, "btn_continue_chat")
     _tv_description = (By.ID, "tv_description")
     stateOfsendCV = "ll_exchange_resume"
+    _black_list_path = "D:\\PycharmProjects\\firstDemo\\gongzuo\\data\\black_list_of_jobs"
+    _black_list = ''
 
     # def setup_method(self):
     #     self.driver = AndroidClient.driver
@@ -54,8 +56,9 @@ class DetailsPageOfJob(BasePage):
         logging.debug(self.driver.page_source)
         page_source = self.driver.page_source
 
-        black_list = ["驻场", "微创软件", "渗透", "专家", "神州数码", "软通动力", "法本", "江苏凯博", "电源", "赴", "外派", "测试主管"]
-        for black in black_list:
+        self._black_list = getContentFromYamlFile(self._black_list_path)
+        logging.debug(self._black_list)
+        for black in self._black_list:
             if black in page_source:
                 logging.debug("命中黑名单，不能投递简历")
                 # todo 不感兴趣

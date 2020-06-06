@@ -1,5 +1,5 @@
 from time import sleep
-
+import yaml
 from appium.webdriver.webdriver import WebDriver
 
 from gongzuo.boss.driver.AndroidClient import AndroidClient
@@ -71,6 +71,13 @@ class Utils(BasePage):
         else:
             return False
 
+
+def getContentFromYamlFile(filepath) -> list:
+    file = open(filepath, 'r', encoding='utf-8')
+    content = yaml.safe_load(file)
+    return content
+
+
 if __name__ == '__main__':
     from gongzuo.boss.page.App import App
     utils = Utils()
@@ -81,3 +88,7 @@ if __name__ == '__main__':
     # driver.get_window_size()
     size = driver.get_window_rect()
     print(size)
+
+if __name__ == '__main__':
+    black_list_path = "gongzuo\\data\\black_list_of_jobs"
+    getContentFromYamlFile(black_list_path)
