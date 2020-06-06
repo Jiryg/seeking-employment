@@ -35,7 +35,7 @@ class Utils(BasePage):
         self.size = self.driver.get_window_size()
         print(self.size)
         self.x_start = self.size["width"] // 2
-        self.y_start = 1325
+        self.y_start = 1200
         self.x_end = self.size["width"] // 2
         self.y_end = 888
         logging.debug("开始执行上滑操作")
