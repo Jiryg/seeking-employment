@@ -28,7 +28,7 @@ class Test_findJob(object):
         mainpage.gotoCategoryOfSelected()
         logging.debug("***********************跟第 %s 个打招呼***********************")
         mainpage.gotoDetailsPageOfjob()
-        if detailpage.ifChatRightly():
+        if detailpage.hasChated() and detailpage.ifChatRightly():
             detailpage.contactRightly()
         else:
             uti.swipeUpOneCard()
