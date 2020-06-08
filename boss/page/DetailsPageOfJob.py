@@ -36,7 +36,7 @@ class DetailsPageOfJob(BasePage):
         uti = Utils()
         chatpage = ChatPage()
 
-        if uti.salaryIsTooHigh() == False:
+        if uti.salaryIsTooHighOrTooLow() == False:
             self.driver.find_element_by_id("btn_chat").click()
             flag = True
         if flag == True:

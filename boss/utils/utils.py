@@ -59,14 +59,18 @@ class Utils(BasePage):
         else:
             return False
 
-    def salaryIsTooHigh(self):
+    def salaryIsTooHighOrTooLow(self):
         self.driver = AndroidClient.driver
         logging.debug(self.driver.find_element_by_id("tv_job_salary").text)
 
         content = self.driver.find_element_by_id("tv_job_salary").text
-        salary = int(content.split('-')[1][:2])
-        if salary > 30:
-            # if "立即沟通" == AndroidClient.driver.find_element_by_id("btn_chat").text:
+        content = content.split('-')[1]
+        salary = int(content.split('K')[0])
+        if salary > 33:
+            logging.debug("工资太高")
+            return True
+        elif salary < 10:
+            logging.debug("工资太低")
             return True
         else:
             return False
