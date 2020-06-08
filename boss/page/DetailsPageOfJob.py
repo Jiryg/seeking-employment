@@ -15,6 +15,8 @@ class DetailsPageOfJob(BasePage):
     _chat_rightly = (By.ID, "btn_chat")
     _btn_continue_chat = (By.ID, "btn_continue_chat")
     _tv_description = (By.ID, "tv_description")
+    # 详情页公司名及招聘者身份
+    _tv_boss_title = "tv_boss_title"
     stateOfsendCV = "ll_exchange_resume"
     _black_list_path = "D:\\PycharmProjects\\firstDemo\\gongzuo\\boss\\data\\black_list_of_jobs"
     _black_list = ''
@@ -65,6 +67,15 @@ class DetailsPageOfJob(BasePage):
                 hit_black_list = True
                 break
         if hit_black_list:
+            self.driver.back()
+            return False
+        else:
+            return True
+
+    def hasChated(self):
+        button = self.driver.find_element_by_id("btn_chat").text
+        if "继续沟通" == button:
+            logging.debug("已经沟通过了")
             self.driver.back()
             return False
         else:
