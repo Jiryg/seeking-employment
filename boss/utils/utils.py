@@ -66,7 +66,7 @@ class Utils(BasePage):
         content = self.driver.find_element_by_id("tv_job_salary").text
         content = content.split('-')[1]
         salary = int(content.split('K')[0])
-        if salary > 33:
+        if salary > 40:
             logging.debug("工资太高")
             return True
         elif salary < 10:
