@@ -29,7 +29,7 @@ class DetailsPageOfJob(BasePage):
     #     self.driver.back()
     # driver = AndroidClient.driver
 
-    def contactRightly(self):
+    def contactRightly(self, category):
         flag = False
         flag_black = True
         self.driver = AndroidClient.driver
@@ -39,12 +39,12 @@ class DetailsPageOfJob(BasePage):
         if uti.salaryIsTooHighOrTooLow() == False:
             self.driver.find_element_by_id("btn_chat").click()
             flag = True
+        # 判断是否自动发简历
         if flag == True:
             sleep(1)
-            # todo 提前发简历
             prper = self.driver.find_element_by_id(self.stateOfsendCV).is_enabled()
             if prper:
-                chatpage.autoSendCV()
+                chatpage.autoSendCV(category)
             self.driver.back()
         sleep(1)
         self.driver.back()
@@ -62,7 +62,7 @@ class DetailsPageOfJob(BasePage):
         logging.debug(self._black_list)
         for black in self._black_list:
             if black in page_source:
-                logging.debug("命中黑名单，不能投递简历")
+                logging.debug("{}---命中黑名单，不能投递简历".format(black))
                 # todo 不感兴趣
                 hit_black_list = True
                 break

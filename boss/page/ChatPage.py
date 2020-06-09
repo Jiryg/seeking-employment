@@ -68,10 +68,20 @@ class ChatPage(BasePage):
         else:
             return True
 
-    def autoSendCV(self):
+    def autoSendCV(self, category='移动端测试'):
+        zidonghua = "//*[@resource-id='com.hpbr.bosszhipin:id/mResumeName' and @instance='5']"
+        ceshigongchengshi = "//*[@resource-id='com.hpbr.bosszhipin:id/mResumeName' and @instance='3']"
+        ceshikaifa = "//*[@resource-id='com.hpbr.bosszhipin:id/mResumeName' and @instance='3']"
         self.driver = AndroidClient.driver
         self.driver.find_element_by_id("tv_exchange_resume").click()
-        self.driver.tap([(312,1500)], 100)
+
+        if category == '自动化测试':
+            self.driver.swipe(500, 1314, 500, 1566, 1500)
+            self.driver.find_element_by_xpath(zidonghua).click()
+        elif category == '测试开发':
+            self.driver.find_element_by_xpath(ceshikaifa).click()
+        else:
+            self.driver.find_element_by_xpath(ceshigongchengshi).click()
         self.driver.find_element_by_id("mSure").click()
 
 

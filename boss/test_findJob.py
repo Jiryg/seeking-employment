@@ -20,16 +20,18 @@ class Test_findJob(object):
         logging.debug("**************类执行结束***************")
 
     # @pytest.mark.parametrize("nums", [50])
-    @pytest.mark.repeat(50)
+    @pytest.mark.repeat(100)
     def test_Contact_MoblieTest(self):
         detailpage = DetailsPageOfJob()
         mainpage = MainPage()
         uti = Utils()
-        mainpage.gotoCategoryOfSelected()
+        # category='移动端测试' 测试开发，其他内容发
+        category = '测试开发'
+        mainpage.gotoCategoryOfSelected(category)
         logging.debug("***********************跟第 %s 个打招呼***********************")
         mainpage.gotoDetailsPageOfjob()
         if detailpage.hasChated() and detailpage.ifChatRightly():
-            detailpage.contactRightly()
+            detailpage.contactRightly(category)
         else:
             uti.swipeUpOneCard()
         logging.debug("执行完毕")
