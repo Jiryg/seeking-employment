@@ -5,12 +5,13 @@ from selenium import webdriver
 import pytest
 from selenium.webdriver import DesiredCapabilities
 from gongzuo.lagou.page.MainPage import MainPage
+from gongzuo.lagou.testcase.BaseTestCase import BaseTestCase
 
 
-class Test_AutoSendCV(object):
-    logging.basicConfig()
-    log = logging.getLogger("hahaha")
-    log.setLevel(logging.DEBUG)
+class Test_AutoSendCV(BaseTestCase):
+    # logging.basicConfig()
+    # log = logging.getLogger("hahaha")
+    # log.setLevel(logging.DEBUG)
 
     def setup_class(self):
         self.url = "https://xueqiu.com/"
@@ -42,7 +43,7 @@ class Test_AutoSendCV(object):
 
     def test_xueqiu(self):
         self.main.search('阿里巴巴').select('BABA')
-        self.log.debug("*************执行完毕**************")
+        self.logger.debug("*************执行完毕**************")
 
 
 
