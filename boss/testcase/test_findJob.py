@@ -8,16 +8,17 @@ from gongzuo.boss.driver.AndroidClient import AndroidClient
 from gongzuo.boss.page.MainPage import MainPage
 from gongzuo.boss.page.DetailsPageOfJob import DetailsPageOfJob
 from gongzuo.boss.page.MessagePage import MessagePage
+from gongzuo.boss.testcase.BaseTestCase import BaseTestCase
 from gongzuo.boss.utils.utils import Utils
 
 
-class Test_findJob(object):
+class Test_findJob(BaseTestCase):
     driver=WebDriver
     def setup_class(self):
         App.main()
 
     def teardown_class(self):
-        logging.debug("**************类执行结束***************")
+        self.logger.debug("**************类执行结束***************")
 
     # @pytest.mark.parametrize("nums", [50])
     @pytest.mark.repeat(100)
@@ -28,13 +29,13 @@ class Test_findJob(object):
         # category='移动端测试' 测试开发，其他内容发
         category = '测试开发'
         mainpage.gotoCategoryOfSelected(category)
-        logging.debug("***********************跟第 %s 个打招呼***********************")
+        self.logger.debug("***********************跟第 %s 个打招呼***********************")
         mainpage.gotoDetailsPageOfjob()
         if detailpage.hasChated() and detailpage.ifChatRightly():
             detailpage.contactRightly(category)
         else:
             uti.swipeUpOneCard()
-        logging.debug("执行完毕")
+        self.logger.debug("执行完毕")
 
 
     @pytest.mark.parametrize("nums", [3])
@@ -46,7 +47,7 @@ class Test_findJob(object):
         # uti = Utils()
         mainpage.gotoMessagePage()
         for x in range(nums):
-            logging.debug("***********************跟第 %s 个沟通***********************", x)
+            self.logger.debug("***********************跟第 %s 个沟通***********************", x)
             sleep(1)
             messagepage.toChatPage()
             if chatpage.ifSend_cv() == True:
@@ -57,7 +58,7 @@ class Test_findJob(object):
             # uti.swipeUpOneCard()
         # detailpage = DetailsPageOfJob()
         # detailpage.contactRightly()
-        logging.debug("执行完毕")
+        self.logger.debug("执行完毕")
 
 
 if __name__ == '__main__':
