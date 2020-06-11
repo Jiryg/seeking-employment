@@ -10,10 +10,10 @@ from gongzuo.boss.page.BasePage import BasePage
 
 class Utils(BasePage):
     # driver: WebDriver
-    logging.basicConfig(level=logging.DEBUG,
-                        format="%(asctime)s %(name)s %(levelname)s %(message)s",
-                        datefmt='%Y-%m-%d  %H:%M:%S %a'
-                        )
+    # logging.basicConfig(level=logging.DEBUG,
+    #                     format="%(asctime)s %(name)s %(levelname)s %(message)s",
+    #                     datefmt='%Y-%m-%d  %H:%M:%S %a'
+    #                     )
     # driver = AndroidClient.driver
     # def __init__(self):
     #     self.driver = AndroidClient.restart_app()
@@ -26,21 +26,21 @@ class Utils(BasePage):
         self.x_end = self.size["width"] // 2
         self.y_end = self.size["height"] // 5 * 2
         sleep(5)
-        logging.debug("开始执行上滑操作")
+        # logging.debug("开始执行上滑操作")
         self.driver.swipe(self.x_start, self.y_start, self.x_end, self.y_end, 1500)
-        logging.debug("上滑操作执行完毕")
+        # logging.debug("上滑操作执行完毕")
 
     def swipeUpOneCard(self):
         self.driver = AndroidClient.driver
         self.size = self.driver.get_window_size()
         print(self.size)
         self.x_start = self.size["width"] // 2
-        self.y_start = 1200
+        self.y_start = 1286
         self.x_end = self.size["width"] // 2
-        self.y_end = 888
-        logging.debug("开始执行上滑操作")
-        self.driver.swipe(self.x_start, self.y_start, self.x_end, self.y_end, 1500)
-        logging.debug("上滑操作执行完毕")
+        self.y_end = 816
+        # logging.debug("开始执行上滑操作")
+        self.driver.swipe(self.x_start, self.y_start, self.x_end, self.y_end, 2000)
+        # logging.debug("上滑操作执行完毕")
 
 
     # 这个方法有问题
@@ -67,10 +67,10 @@ class Utils(BasePage):
         content = content.split('-')[1]
         salary = int(content.split('K')[0])
         if salary > 40:
-            logging.debug("工资太高")
+            # logging.debug("工资太高")
             return True
         elif salary < 10:
-            logging.debug("工资太低")
+            # logging.debug("工资太低")
             return True
         else:
             return False

@@ -69,19 +69,27 @@ class ChatPage(BasePage):
             return True
 
     def autoSendCV(self, category='移动端测试'):
-        zidonghua = "//*[@resource-id='com.hpbr.bosszhipin:id/mResumeName' and @instance='5']"
-        ceshigongchengshi = "//*[@resource-id='com.hpbr.bosszhipin:id/mResumeName' and @instance='3']"
-        ceshikaifa = "//*[@resource-id='com.hpbr.bosszhipin:id/mResumeName' and @instance='3']"
+        chatpage = ChatPage()
+        # zidonghua = "//*[@resource-id='com.hpbr.bosszhipin:id/mResumeName' and @instance='5']"
+        zidonghua = '//*[contains(@text, "自动化测试工程师")]'
+        # ceshigongchengshi = "//*[@resource-id='com.hpbr.bosszhipin:id/mResumeName' and @instance='3']"
+        ceshigongchengshi = '//*[contains(@text, "-测试工程师")]'
+        # ceshikaifa = "//*[@resource-id='com.hpbr.bosszhipin:id/mResumeName' and @instance='3']"
+        ceshikaifa = '//*[contains(@text, "测试开发")]'
         self.driver = AndroidClient.driver
         self.driver.find_element_by_id("tv_exchange_resume").click()
 
         if category == '自动化测试':
-            self.driver.swipe(500, 1314, 500, 1566, 1500)
-            self.driver.find_element_by_xpath(zidonghua).click()
+            chatpage.findElementAndClick(zidonghua)
+        #     self.driver.swipe(500, 1314, 500, 1566, 1500)
+        #     self.driver.find_element_by_xpath(zidonghua).click()
         elif category == '测试开发':
-            self.driver.find_element_by_xpath(ceshikaifa).click()
+            chatpage.findElementAndClick(ceshikaifa)
+        #     self.driver.find_element_by_xpath(ceshikaifa).click()
         else:
-            self.driver.find_element_by_xpath(ceshigongchengshi).click()
+            chatpage.findElementAndClick(ceshigongchengshi)
+        #     self.driver.swipe(500, 1314, 500, 1566, 1500)
+        #     self.driver.find_element_by_xpath(ceshigongchengshi).click()
         self.driver.find_element_by_id("mSure").click()
 
 

@@ -37,6 +37,7 @@ class DetailsPageOfJob(BasePage):
         chatpage = ChatPage()
 
         if uti.salaryIsTooHighOrTooLow() == False:
+            self.logger.debug("size 是：", self.driver.find_element_by_id("btn_chat").size)
             self.driver.find_element_by_id("btn_chat").click()
             flag = True
         # 判断是否自动发简历
@@ -54,15 +55,15 @@ class DetailsPageOfJob(BasePage):
     def ifChatRightly(self):
         self.driver = AndroidClient.driver
         hit_black_list = False
-        logging.debug("**************page_source的内容是：***************")
-        logging.debug(self.driver.page_source)
+        self.logger.debug("**************page_source的内容是：***************")
+        self.logger.debug(self.driver.page_source)
         page_source = self.driver.page_source
 
         self._black_list = getContentFromYamlFile(self._black_list_path)
-        logging.debug(self._black_list)
+        self.logger.debug(self._black_list)
         for black in self._black_list:
             if black in page_source:
-                logging.debug("{}---命中黑名单，不能投递简历".format(black))
+                self.logger.debug("{}---命中黑名单，不能投递简历".format(black))
                 # todo 不感兴趣
                 hit_black_list = True
                 break
@@ -75,7 +76,7 @@ class DetailsPageOfJob(BasePage):
     def hasChated(self):
         button = self.driver.find_element_by_id("btn_chat").text
         if "继续沟通" == button:
-            logging.debug("已经沟通过了")
+            self.logger.debug("已经沟通过了")
             self.driver.back()
             return False
         else:
