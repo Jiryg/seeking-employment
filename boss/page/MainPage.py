@@ -26,13 +26,21 @@ class MainPage(BasePage):
         else:
             self.driver.find_element_by_xpath("//*[@resource-id='com.hpbr.bosszhipin:id/title_container'] "
                                               "//*[@text='自动化测试' and @instance='2']").click()
-        logging.info("到所选择的工作类别：{}".format(category))
+        self.logger.info("到所选择的工作类别：{}".format(category))
         # return MainPage()
         # return ProfilePage()
 
     def gotoDetailsPageOfjob(self):
-        sleep(5)
-        self.driver.tap([(300, 500)], 100)
+        job_card = "boss_job_card_view"
+        # sleep(5)
+        # png = self.driver.get_screenshot_as_png()
+        # with open('\\2.png', 'wb') as f:
+        #     f.write(png)
+        data = self.driver.find_elements_by_id(job_card)
+        self.logger.debug(data[0])
+        data[0].click()
+        # self.driver.tap([(300, 1000)], 100)
+
         # return DetailsPageOfJob()
 
     def gotoMessagePage(self):
