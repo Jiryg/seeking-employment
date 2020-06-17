@@ -1,0 +1,11 @@
+gotoCategoryOfSelected:
+  - locator: //*[@resource-id='com.hpbr.bosszhipin:id/title_container'] //*[@text='移动端测试']
+    by: xpath
+    action: click
+  - locator: tv_login_phone
+    by: id
+    action: click
+gotoDetailsPageOfjob:
+  - locator: boss_job_card_view
+    by: id
+    action: click

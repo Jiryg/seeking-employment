@@ -10,7 +10,7 @@ from gongzuo.boss.page import App
 
 
 class MainPage(BasePage):
-
+    mainpage_YAML_path = "D:\\PycharmProjects\\firstDemo\\gongzuo\\boss\\data\\MainPage"
     # def __init__(self):
     #     print("这个执行吗")
     #     # andriodClient = AndroidClient()
@@ -19,7 +19,6 @@ class MainPage(BasePage):
     def gotoCategoryOfSelected(self, category='移动端测试'):
         self.driver = AndroidClient.driver
         if category == '移动端测试':
-            # self.driver.find_element(self, by=By.XPATH, value="//*[@resource-id='com.hpbr.bosszhipin:id/title_container'] //*[@text='移动端测试']").click()
             self.driver.find_element_by_xpath("//*[@resource-id='com.hpbr.bosszhipin:id/title_container'] //*[@text='移动端测试']").click()
         elif category == "测试开发":
             self.driver.find_element_by_xpath("//*[@resource-id='com.hpbr.bosszhipin:id/title_container'] //*[@text='测试开发' and @instance='1']").click()
@@ -31,15 +30,12 @@ class MainPage(BasePage):
         # return ProfilePage()
 
     def gotoDetailsPageOfjob(self):
-        job_card = "boss_job_card_view"
+        self.loadSteps(self.mainpage_YAML_path, "gotoDetailsPageOfjob")
         # sleep(5)
         # png = self.driver.get_screenshot_as_png()
         # with open('\\2.png', 'wb') as f:
         #     f.write(png)
-        data = self.driver.find_elements_by_id(job_card)
-        self.logger.debug(data[0])
-        data[0].click()
-        # self.driver.tap([(300, 1000)], 100)
+
 
         # return DetailsPageOfJob()
 
