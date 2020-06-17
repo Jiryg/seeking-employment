@@ -18,6 +18,7 @@ class DetailsPageOfJob(BasePage):
     # 详情页公司名及招聘者身份
     _tv_boss_title = "tv_boss_title"
     stateOfsendCV = "ll_exchange_resume"
+    _close_button = "tv_cancel"
     _black_list_path = "D:\\PycharmProjects\\firstDemo\\gongzuo\\boss\\data\\black_list_of_jobs"
     _black_list = ''
 
@@ -42,11 +43,15 @@ class DetailsPageOfJob(BasePage):
             flag = True
         # 判断是否自动发简历
         if flag == True:
+            prper = None
             sleep(1)
-            prper = self.driver.find_element_by_id(self.stateOfsendCV).is_enabled()
-            if prper:
-                chatpage.autoSendCV(category)
-            self.driver.back()
+            try:
+                prper = self.driver.find_element_by_id(self._close_button)
+            except:
+                if prper:
+                    chatpage.autoSendCV(category)
+            finally:
+                self.driver.back()
         sleep(1)
         self.driver.back()
         sleep(1)
